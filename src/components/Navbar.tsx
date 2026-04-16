@@ -16,9 +16,9 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border">
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="SABBIR FITNESS" className="h-14 w-auto" />
+      <div className="container mx-auto px-3 sm:px-4 flex items-center justify-between h-16 sm:h-18 md:h-20">
+        <a href="#" className="flex items-center gap-2 shrink-0">
+          <img src={logo} alt="SABBIR FITNESS" className="h-12 sm:h-16 md:h-18 w-auto" />
         </a>
 
         {/* Desktop */}
