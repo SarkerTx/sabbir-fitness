@@ -1,4 +1,5 @@
 import heroImage from "@/assets/hero-gym.jpg";
+import logo from "@/assets/logo.jpg";
 import { Button } from "@/components/ui/button";
 import { Dumbbell, Users, Award } from "lucide-react";
 
@@ -25,10 +26,12 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4">
-          SABBIR <span className="text-gradient">FITNESS</span>
-        </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl text-foreground/80 mb-8 font-medium">
+        <img
+          src={logo}
+          alt="SABBIR FITNESS লোগো"
+          className="h-28 md:h-36 lg:h-44 w-auto mx-auto mb-6 drop-shadow-2xl rounded-lg"
+        />
+        <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 font-semibold">
           শরীর গঠন করুন, নিজেকে সুস্থ রাখুন
         </p>
         <a href="#admission">
@@ -43,10 +46,10 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-3 gap-6 max-w-2xl mx-auto">
           {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-2">
-              <stat.icon className="w-8 h-8 text-primary" />
+            <div key={stat.label} className="flex flex-col items-center gap-2 bg-background/30 backdrop-blur-sm rounded-xl py-4 px-2">
+              <stat.icon className="w-7 h-7 text-accent" />
               <span className="text-3xl md:text-4xl font-bold text-foreground">{stat.value}</span>
-              <span className="text-sm md:text-base text-muted-foreground">{stat.label}</span>
+              <span className="text-sm md:text-base text-foreground/70">{stat.label}</span>
             </div>
           ))}
         </div>
