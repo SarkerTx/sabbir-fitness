@@ -3,7 +3,10 @@ import { mockMembers, Member } from "@/data/mockData";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
+import { Search, Trash2 } from "lucide-react";
 
 const statusMap: Record<string, { label: string; class: string }> = {
   active: { label: "সক্রিয়", class: "bg-primary/15 text-primary" },
@@ -12,19 +15,29 @@ const statusMap: Record<string, { label: string; class: string }> = {
 };
 
 const AdminMembers = () => {
+  const [members, setMembers] = useState<Member[]>(mockMembers);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const members = mockMembers.filter(m => {
+  const [deleteTarget, setDeleteTarget] = useState<Member | null>(null);
+  const { toast } = useToast();
+
+  const filtered = members.filter(m => {
     const matchSearch = m.full_name.includes(search) || m.phone.includes(search);
     const matchStatus = statusFilter === "all" || m.status === statusFilter;
     return matchSearch && matchStatus;
   });
 
+  const handleRemove = () => {
+    if (!deleteTarget) return;
+    setMembers(prev => prev.filter(m => m.id !== deleteTarget.id));
+    toast({ title: "সদস্য মুছে ফেলা হয়েছে", description: `${deleteTarget.full_name} সফলভাবে মুছে ফেলা হয়েছে।` });
+    setDeleteTarget(null);
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-foreground">সদস্য ব্যবস্থাপনা</h1>
 
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -41,7 +54,6 @@ const AdminMembers = () => {
         </Select>
       </div>
 
-      {/* Table */}
       <div className="bg-card border border-border rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -53,10 +65,11 @@ const AdminMembers = () => {
                 <th className="text-left p-3 font-semibold text-foreground">মেয়াদ</th>
                 <th className="text-left p-3 font-semibold text-foreground">অ্যাড-অন</th>
                 <th className="text-left p-3 font-semibold text-foreground">স্ট্যাটাস</th>
+                <th className="text-left p-3 font-semibold text-foreground">অ্যাকশন</th>
               </tr>
             </thead>
             <tbody>
-              {members.map(m => {
+              {filtered.map(m => {
                 const s = statusMap[m.status];
                 return (
                   <tr key={m.id} className="border-b border-border/50 hover:bg-muted/20">
@@ -72,16 +85,37 @@ const AdminMembers = () => {
                     <td className="p-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs ${s.class}`}>{s.label}</span>
                     </td>
+                    <td className="p-3">
+                      <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => setDeleteTarget(m)}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </td>
                   </tr>
                 );
               })}
-              {members.length === 0 && (
-                <tr><td colSpan={6} className="p-6 text-center text-muted-foreground">কোনো সদস্য পাওয়া যায়নি।</td></tr>
+              {filtered.length === 0 && (
+                <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">কোনো সদস্য পাওয়া যায়নি।</td></tr>
               )}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* Delete confirmation dialog */}
+      <Dialog open={!!deleteTarget} onOpenChange={(o) => !o && setDeleteTarget(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>সদস্য মুছে ফেলবেন?</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">
+            আপনি কি নিশ্চিত যে <span className="font-semibold text-foreground">{deleteTarget?.full_name}</span> কে মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।
+          </p>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => setDeleteTarget(null)}>বাতিল</Button>
+            <Button variant="destructive" onClick={handleRemove}>মুছে ফেলুন</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
