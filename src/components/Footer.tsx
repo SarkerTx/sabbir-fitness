@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <img src={logo} alt="SABBIR FITNESS" className="h-14 w-auto rounded mb-3" />
+            <img src={logo} alt="SABBIR FITNESS" className="h-18 w-auto mb-3" />
             <p className="text-muted-foreground text-sm">
               শরীর গঠন করুন, নিজেকে সুস্থ রাখুন
             </p>
