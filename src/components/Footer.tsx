@@ -1,4 +1,5 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const Footer = () => {
   return (
@@ -6,9 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-black mb-2">
-              SABBIR <span className="text-gradient">FITNESS</span>
-            </h3>
+            <img src={logo} alt="SABBIR FITNESS" className="h-14 w-auto rounded mb-3" />
             <p className="text-muted-foreground text-sm">
               শরীর গঠন করুন, নিজেকে সুস্থ রাখুন
             </p>

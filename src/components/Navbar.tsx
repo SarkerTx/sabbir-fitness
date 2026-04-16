@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "হোম", href: "#" },
@@ -14,10 +15,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        <a href="#" className="text-xl font-black tracking-tight">
-          SABBIR <span className="text-gradient">FITNESS</span>
+        <a href="#" className="flex items-center gap-2">
+          <img src={logo} alt="SABBIR FITNESS" className="h-10 w-auto rounded" />
         </a>
 
         {/* Desktop */}
