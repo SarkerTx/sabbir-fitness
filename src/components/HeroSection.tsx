@@ -1,5 +1,5 @@
 import heroImage from "@/assets/hero-gym.jpg";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Dumbbell, Users, Award } from "lucide-react";
 
