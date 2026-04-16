@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Dumbbell, Users, Award } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: "৫০০+", label: "সদস্য সংখ্যা" },
-  { icon: Dumbbell, value: "১০+", label: "প্রশিক্ষক সংখ্যা" },
+  { icon: Users, value: "৩০০+", label: "সদস্য সংখ্যা" },
+  { icon: Dumbbell, value: "৫+", label: "প্রশিক্ষক সংখ্যা" },
   { icon: Award, value: "৫+", label: "অভিজ্ঞতার বছর" },
 ];
 
@@ -21,7 +21,7 @@ const HeroSection = () => {
           width={1920}
           height={1080}
         />
-        <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
       </div>
 
       {/* Content */}
@@ -46,7 +46,10 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-3 gap-6 max-w-2xl mx-auto">
           {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-2 bg-background/30 backdrop-blur-sm rounded-xl py-4 px-2">
+            <div
+              key={stat.label}
+              className="flex flex-col items-center gap-2 bg-background/30 backdrop-blur-sm rounded-xl py-4 px-2"
+            >
               <stat.icon className="w-7 h-7 text-accent" />
               <span className="text-3xl md:text-4xl font-bold text-foreground">{stat.value}</span>
               <span className="text-sm md:text-base text-foreground/70">{stat.label}</span>
