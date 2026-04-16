@@ -37,9 +37,11 @@ const HeroSection = () => {
         <a href="#admission">
           <Button
             size="lg"
-            className="bg-gradient-primary text-primary-foreground text-lg md:text-xl px-8 py-6 rounded-full shadow-glow animate-pulse-glow hover:scale-105 transition-transform duration-300 font-semibold"
+            className="bg-gradient-primary text-primary-foreground text-sm sm:text-lg md:text-xl px-5 sm:px-8 py-4 sm:py-6 rounded-full shadow-glow animate-pulse-glow hover:scale-105 transition-transform duration-300 font-semibold whitespace-normal leading-snug max-w-xs sm:max-w-none"
           >
-            এখনই ভর্তি হোন – ১০০% ছাড় !! (প্রথম মাসের জন্য)
+            এখনই ভর্তি হোন – ১০০% ছাড় !!
+            <br className="sm:hidden" />
+            <span className="hidden sm:inline"> </span>(প্রথম মাসের জন্য)
           </Button>
         </a>
 
