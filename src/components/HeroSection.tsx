@@ -29,7 +29,7 @@ const HeroSection = () => {
         <img
           src={logo}
           alt="SABBIR FITNESS লোগো"
-          className="h-28 md:h-36 lg:h-44 w-auto mx-auto mb-6 drop-shadow-2xl rounded-lg"
+          className="h-36 md:h-44 lg:h-56 w-auto mx-auto mb-6 drop-shadow-2xl"
         />
         <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 font-semibold">
           শরীর গঠন করুন, নিজেকে সুস্থ রাখুন
