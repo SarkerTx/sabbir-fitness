@@ -26,12 +26,35 @@ const AdmissionForm = () => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handlePhoneChange = (field: "phone" | "emergencyContact", value: string) => {
+    const digitsOnly = value.replace(/\D/g, "").slice(0, 11);
+    setForm((prev) => ({ ...prev, [field]: digitsOnly }));
+  };
+
+  const isValidBdPhone = (num: string) => /^01[3-9]\d{8}$/.test(num);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.fullName || !form.phone || !form.plan) {
       toast({
         title: "ত্রুটি",
         description: "অনুগ্রহ করে সকল প্রয়োজনীয় তথ্য পূরণ করুন।",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!isValidBdPhone(form.phone)) {
+      toast({
+        title: "ভুল মোবাইল নম্বর",
+        description: "অনুগ্রহ করে ১১ ডিজিটের সঠিক বাংলাদেশি নম্বর দিন (যেমন: ০১XXXXXXXXX)।",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (form.emergencyContact && !isValidBdPhone(form.emergencyContact)) {
+      toast({
+        title: "ভুল জরুরি যোগাযোগ নম্বর",
+        description: "জরুরি যোগাযোগের নম্বরটি ১১ ডিজিটের সঠিক বাংলাদেশি নম্বর হতে হবে।",
         variant: "destructive",
       });
       return;
@@ -99,9 +122,12 @@ const AdmissionForm = () => {
               <Label htmlFor="phone">মোবাইল নম্বর *</Label>
               <Input
                 id="phone"
+                type="tel"
+                inputMode="numeric"
+                maxLength={11}
                 placeholder="০১XXXXXXXXX"
                 value={form.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
+                onChange={(e) => handlePhoneChange("phone", e.target.value)}
               />
             </div>
             <div className="space-y-2">
@@ -118,9 +144,12 @@ const AdmissionForm = () => {
               <Label htmlFor="emergencyContact">জরুরি যোগাযোগ</Label>
               <Input
                 id="emergencyContact"
-                placeholder="জরুরি যোগাযোগের নম্বর"
+                type="tel"
+                inputMode="numeric"
+                maxLength={11}
+                placeholder="০১XXXXXXXXX"
                 value={form.emergencyContact}
-                onChange={(e) => handleChange("emergencyContact", e.target.value)}
+                onChange={(e) => handlePhoneChange("emergencyContact", e.target.value)}
               />
             </div>
           </div>
