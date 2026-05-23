@@ -8,7 +8,7 @@ const navLinks = [
   { label: "আমাদের সম্পর্কে", href: "#about" },
   { label: "মূল্য তালিকা", href: "#pricing" },
   { label: "প্রশিক্ষক", href: "#trainers" },
-  { label: "নোটিশ", href: "#notices" },
+  { label: "নোটিশ বোর্ড", href: "#notices" },
 ];
 
 const Navbar = () => {
